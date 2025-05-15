@@ -90,7 +90,7 @@ class DownloadAndLoadFramePackModel:
     def INPUT_TYPES(s):
         return {
             "required": {
-                "model": (["lllyasviel/FramePackI2V_HY"],),
+                "model": (["lllyasviel/FramePackI2V_HY", "lllyasviel/FramePack_F1_I2V_HY_20250503"],),
 
             "base_precision": (["fp32", "bf16", "fp16"], {"default": "bf16"}),
             "quantization": (['disabled', 'fp8_e4m3fn', 'fp8_e4m3fn_fast', 'fp8_e5m2'], {"default": 'disabled', "tooltip": "optional quantization method"}),
@@ -117,7 +117,7 @@ class DownloadAndLoadFramePackModel:
 
         device = mm.get_torch_device()
 
-        model_path = os.path.join(folder_paths.models_dir, "diffusers", "lllyasviel", "FramePackI2V_HY")
+        model_path = os.path.join(folder_paths.models_dir, "diffusers", model)
         if not os.path.exists(model_path):
             print(f"Downloading clip model to: {model_path}")
             from huggingface_hub import snapshot_download
